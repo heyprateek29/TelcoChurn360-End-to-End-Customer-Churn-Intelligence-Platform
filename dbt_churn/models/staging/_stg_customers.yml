@@ -1,0 +1,60 @@
+# dbt_churn/models/staging/_stg_customers.yml
+# ─────────────────────────────────────────────────────────────
+# STAGING MODEL DOCUMENTATION & TESTS
+# dbt test runs these automatically with: dbt test
+# ─────────────────────────────────────────────────────────────
+
+version: 2
+
+models:
+  - name: stg_customers
+    description: >
+      Cleaned and typed customer records from the IBM Telco dataset.
+      One row per customer. Source of truth for all downstream marts.
+
+    columns:
+      - name: customer_id
+        description: Unique customer identifier
+        tests:
+          - unique
+          - not_null
+
+      - name: churn_flag
+        description: Binary churn indicator — 1=churned, 0=retained
+        tests:
+          - not_null
+          - accepted_values:
+              values: [0, 1]
+
+      - name: tenure
+        description: Months with the company (0–72)
+        tests:
+          - not_null
+
+      - name: monthly_charges
+        description: Current monthly bill (USD)
+        tests:
+          - not_null
+
+      - name: total_charges
+        description: Cumulative charges since joining
+        tests:
+          - not_null
+
+      - name: contract
+        description: Contract type
+        tests:
+          - accepted_values:
+              values: ['Month-to-month', 'One year', 'Two year']
+
+      - name: tenure_segment
+        description: Business lifecycle bucket
+        tests:
+          - accepted_values:
+              values: ['New', 'Growing', 'Established', 'Loyal', 'Champion']
+
+      - name: contract_risk_score
+        description: "Ordinal risk — 3=month-to-month, 2=one year, 1=two year"
+        tests:
+          - accepted_values:
+              values: [1, 2, 3]

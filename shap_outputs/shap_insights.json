@@ -1,0 +1,61 @@
+{
+  "top_churn_drivers": [
+    {
+      "feature": "contract_risk_score",
+      "impact": 0.0593,
+      "direction": "decreases"
+    },
+    {
+      "feature": "contract_Month-to-month",
+      "impact": 0.0493,
+      "direction": "decreases"
+    },
+    {
+      "feature": "tenure",
+      "impact": 0.046,
+      "direction": "decreases"
+    },
+    {
+      "feature": "internet_service_Fiber optic",
+      "impact": 0.0386,
+      "direction": "decreases"
+    },
+    {
+      "feature": "total_charges",
+      "impact": 0.0279,
+      "direction": "decreases"
+    },
+    {
+      "feature": "contract_Two year",
+      "impact": 0.0255,
+      "direction": "decreases"
+    },
+    {
+      "feature": "monthly_charges",
+      "impact": 0.0242,
+      "direction": "decreases"
+    },
+    {
+      "feature": "payment_method_Electronic check",
+      "impact": 0.0238,
+      "direction": "decreases"
+    },
+    {
+      "feature": "avg_monthly_spend",
+      "impact": 0.0234,
+      "direction": "decreases"
+    },
+    {
+      "feature": "tenure_segment_New",
+      "impact": 0.0197,
+      "direction": "decreases"
+    }
+  ],
+  "plain_english_summary": [
+    "Short tenure customers churn most frequently.",
+    "Month-to-month contracts are the highest-risk segment.",
+    "High monthly charges increase churn risk.",
+    "High lifetime spend protects against churn.",
+    "Fiber optic users show elevated churn risk."
+  ]
+}

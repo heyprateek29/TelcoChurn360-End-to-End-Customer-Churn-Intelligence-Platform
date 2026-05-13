@@ -1,0 +1,63 @@
+# dbt_churn/models/staging/_sources.yml
+# ─────────────────────────────────────────────────────────────
+# SOURCE DEFINITIONS
+#
+# This file declares the raw data contract.
+# It tells dbt WHERE the raw data lives so models can reference
+# it with {{ source('telco_raw', 'customers') }} instead of
+# hardcoding file paths.
+#
+# It also lets dbt run freshness checks and source tests.
+# ─────────────────────────────────────────────────────────────
+
+version: 2
+
+sources:
+  - name: telco_raw
+    description: >
+      IBM Telco Customer Churn dataset — cleaned and feature-engineered
+      by the Phase 2 ingestion pipeline (src/ingest.py).
+      Loaded from the processed parquet file into DuckDB.
+    schema: main
+
+    tables:
+      - name: customers
+        description: >
+          One row per customer. Contains demographics, service subscriptions,
+          contract details, billing info, churn flag, and engineered features.
+
+        columns:
+          - name: customer_id
+            description: Unique customer identifier
+            tests:
+              - unique
+              - not_null
+
+          - name: churn_flag
+            description: "1 = churned, 0 = retained"
+            tests:
+              - not_null
+              - accepted_values:
+                  values: [0, 1]
+
+          - name: tenure
+            description: Number of months the customer has been with the company
+            tests:
+              - not_null
+
+          - name: monthly_charges
+            description: Current monthly bill amount in USD
+            tests:
+              - not_null
+
+          - name: contract
+            description: Contract type
+            tests:
+              - accepted_values:
+                  values: ['Month-to-month', 'One year', 'Two year']
+
+          - name: internet_service
+            description: Internet service type
+            tests:
+              - accepted_values:
+                  values: ['DSL', 'Fiber optic', 'No']

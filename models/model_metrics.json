@@ -1,0 +1,13 @@
+{
+  "roc_auc": 0.8426,
+  "cv_roc_auc": 0.8451,
+  "precision_churn": 0.5547,
+  "recall_churn": 0.7326,
+  "f1_churn": 0.6313,
+  "accuracy": 0.7729,
+  "true_negatives": 815,
+  "false_positives": 220,
+  "false_negatives": 100,
+  "true_positives": 274,
+  "test_size": 1409
+}

@@ -1,0 +1,21 @@
+SHAP BUSINESS INSIGHTS
+============================================================
+
+Top churn drivers:
+1. ↓ contract_risk_score (impact=0.0593)
+2. ↓ contract_Month-to-month (impact=0.0493)
+3. ↓ tenure (impact=0.046)
+4. ↓ internet_service_Fiber optic (impact=0.0386)
+5. ↓ total_charges (impact=0.0279)
+6. ↓ contract_Two year (impact=0.0255)
+7. ↓ monthly_charges (impact=0.0242)
+8. ↓ payment_method_Electronic check (impact=0.0238)
+9. ↓ avg_monthly_spend (impact=0.0234)
+10. ↓ tenure_segment_New (impact=0.0197)
+
+Plain-English Insights:
+1. Short tenure customers churn most frequently.
+2. Month-to-month contracts are the highest-risk segment.
+3. High monthly charges increase churn risk.
+4. High lifetime spend protects against churn.
+5. Fiber optic users show elevated churn risk.

@@ -1,0 +1,35 @@
+# Core data
+pandas==2.2.2
+numpy==1.26.4
+
+# Database
+duckdb==0.10.2
+
+# Machine learning
+scikit-learn==1.5.0
+imbalanced-learn==0.12.3
+
+# Explainability
+shap==0.45.1
+
+# API
+fastapi==0.111.0
+uvicorn==0.30.1
+pydantic==2.7.3
+
+# Dashboard
+streamlit==1.35.0
+plotly==5.22.0
+
+# Airflow (install separately — see note below)
+# apache-airflow==2.9.2
+
+# dbt
+dbt-core==1.8.3
+dbt-duckdb==1.8.1
+
+# Utilities
+python-dotenv==1.0.1
+joblib==1.4.2
+matplotlib==3.9.0
+seaborn==0.13.2

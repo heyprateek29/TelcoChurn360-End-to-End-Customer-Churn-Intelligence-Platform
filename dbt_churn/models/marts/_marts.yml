@@ -1,0 +1,68 @@
+# dbt_churn/models/marts/_marts.yml
+# ─────────────────────────────────────────────────────────────
+# MART MODEL DOCUMENTATION & TESTS
+# ─────────────────────────────────────────────────────────────
+
+version: 2
+
+models:
+
+  - name: mart_churn_kpis
+    description: >
+      Single-row summary of all top-level churn KPIs.
+      Consumed by the Streamlit dashboard KPI card section.
+    columns:
+      - name: total_customers
+        description: Total customers in the dataset
+        tests:
+          - not_null
+      - name: churn_rate_pct
+        description: Overall churn rate as a percentage
+        tests:
+          - not_null
+      - name: monthly_revenue_lost
+        description: Monthly revenue lost to churned customers
+
+  - name: mart_churn_by_segment
+    description: >
+      Churn metrics broken out by tenure segment, contract type,
+      internet service, payment method, and charges tier.
+      One row per dimension–value combination.
+    columns:
+      - name: dimension
+        description: Grouping dimension name
+        tests:
+          - not_null
+      - name: dimension_value
+        description: Specific value within the dimension
+        tests:
+          - not_null
+      - name: churn_rate_pct
+        description: Churn rate for this segment
+        tests:
+          - not_null
+
+  - name: mart_customer_risk
+    description: >
+      One row per customer with a rule-based risk score (0–100),
+      risk category, value tier, and recommended retention action.
+      Used for CRM exports and dashboard risk tables.
+    columns:
+      - name: customer_id
+        description: Unique customer identifier
+        tests:
+          - unique
+          - not_null
+      - name: risk_score
+        description: Rule-based risk score from 0 (safe) to 100 (critical)
+        tests:
+          - not_null
+      - name: risk_category
+        description: Risk bucket
+        tests:
+          - accepted_values:
+              values: ['Critical', 'High', 'Medium', 'Low']
+      - name: recommended_action
+        description: Plain-English CRM action for this customer
+        tests:
+          - not_null
