@@ -37,48 +37,60 @@ identifies who will churn, why they will churn, and what retention action to tak
 ---
 
 ## Architecture
+## Architecture
+
+```text
 IBM Telco CSV (7,043 rows)
-|
-v
+        │
+        ▼
 [Ingestion & Cleaning]        src/ingest.py · Pandas
-Fix data types               8 engineered business features
-Engineer features            Saves CSV + Parquet
-|
-+-----------> [SQL Analytics]        DuckDB
-|               7 KPI queries         No server needed
-|               $139k/mo at risk      7 output CSVs
-|
-+-----------> [dbt Models]            dbt-core + dbt-duckdb
-|               stg_customers          18 data quality tests
-|               mart_churn_kpis        3 mart tables
-|               mart_customer_risk
-|
-+-----------> [ML Pipeline]           scikit-learn
-StandardScaler +       RandomForest 300 trees
-OneHotEncoder          ROC-AUC 0.8426
-5-fold CV
-|
-v
-[SHAP Explainability]   SHAP TreeExplainer
-4 plots                plain-English insights
-shap_insights.json
-|
-v
-[FastAPI]               localhost:8000/docs
-POST /predict          Swagger UI
-POST /predict/batch    Pydantic validation
-GET  /health
-|
-v
-[Pipeline Runner]       src/run_pipeline.py
-Orchestrates all       52 seconds total
-steps in sequence      Quality gates
-|
-v
-[Streamlit Dashboard]   localhost:8501
-6 pages                Live prediction
-KPI cards              SHAP plots
-Revenue risk           Segments
+- Fix data types
+- 8 engineered business features
+- Saves CSV + Parquet
+        │
+        ├──────────► [SQL Analytics]          DuckDB
+        │              - 7 KPI queries
+        │              - $139k/mo at risk
+        │              - 7 output CSVs
+        │
+        ├──────────► [dbt Models]             dbt-core + dbt-duckdb
+        │              - stg_customers
+        │              - mart_churn_kpis
+        │              - mart_customer_risk
+        │              - 18 data quality tests
+        │
+        ├──────────► [ML Pipeline]            scikit-learn
+        │              - RandomForest (300 trees)
+        │              - ROC-AUC 0.8426
+        │              - 5-fold CV
+        │
+        ▼
+[SHAP Explainability]         SHAP TreeExplainer
+- 4 plots
+- Plain-English insights
+- shap_insights.json
+        │
+        ▼
+[FastAPI]                     localhost:8000/docs
+- POST /predict
+- POST /predict/batch
+- GET /health
+- Swagger UI
+        │
+        ▼
+[Pipeline Runner]             src/run_pipeline.py
+- Sequential orchestration
+- Quality gates
+- 52 seconds runtime
+        │
+        ▼
+[Streamlit Dashboard]         localhost:8501
+- 6 pages
+- KPI cards
+- SHAP plots
+- Revenue risk
+- Live prediction
+```
 ---
 
 ## Key Business Insights
