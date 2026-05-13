@@ -162,6 +162,9 @@ uvicorn api.main:app --reload --port 8000
 ---
 
 ## Project Structure
+## Project Structure
+
+```text
 telcochurn360/
 │
 ├── data/
@@ -171,7 +174,7 @@ telcochurn360/
 │       ├── telco_cleaned.parquet    # Fast format for DuckDB
 │       └── sql_outputs/             # 7 SQL query result CSVs
 │
-├── sql/                             # Phase 3 — 7 analytical SQL queries
+├── sql/                             # Phase 3 — SQL analytics
 │   ├── churn_kpis.sql
 │   ├── revenue_at_risk.sql
 │   ├── churn_by_contract.sql
@@ -180,13 +183,13 @@ telcochurn360/
 │   ├── customer_segmentation.sql
 │   └── retention_analysis.sql
 │
-├── models/                          # Phase 4 — trained model artifacts
-│   ├── churn_model.pkl              # Full sklearn Pipeline
-│   ├── feature_meta.pkl             # Feature column names
-│   ├── model_metrics.json           # ROC-AUC, F1, confusion matrix
-│   └── plots/                       # ROC curve, confusion matrix, importances
+├── models/                          # Phase 4 — trained ML artifacts
+│   ├── churn_model.pkl
+│   ├── feature_meta.pkl
+│   ├── model_metrics.json
+│   └── plots/
 │
-├── shap_outputs/                    # Phase 5 — SHAP explanations
+├── shap_outputs/                    # Phase 5 — SHAP explainability
 │   ├── shap_summary.png
 │   ├── shap_bar.png
 │   ├── shap_waterfall.png
@@ -197,39 +200,33 @@ telcochurn360/
 │   ├── dbt_project.yml
 │   └── models/
 │       ├── staging/
-│       │   ├── stg_customers.sql
-│       │   ├── _sources.yml
-│       │   └── _stg_customers.yml
 │       └── marts/
-│           ├── mart_churn_kpis.sql
-│           ├── mart_churn_by_segment.sql
-│           ├── mart_customer_risk.sql
-│           └── _marts.yml
 │
 ├── api/                             # Phase 7 — FastAPI service
-│   ├── schemas.py                   # Pydantic request/response models
-│   ├── model_loader.py              # Model loading + business logic
-│   └── main.py                      # 4 endpoints + CORS + timing
+│   ├── schemas.py
+│   ├── model_loader.py
+│   └── main.py
 │
-├── dashboard/                       # Phase 9 — Streamlit dashboard
-│   └── app.py                       # 6-page interactive dashboard
+├── dashboard/                       # Phase 8 — Streamlit dashboard
+│   └── app.py
 │
-├── src/                             # Pipeline modules
-│   ├── ingest.py                    # Phase 2: ingestion + cleaning
-│   ├── run_sql_analytics.py         # Phase 3: DuckDB runner
-│   ├── train.py                     # Phase 4: ML training
-│   ├── explain.py                   # Phase 5: SHAP
-│   ├── run_dbt.py                   # Phase 6: dbt runner
-│   └── run_pipeline.py              # Full pipeline orchestrator
+├── src/                             # Core pipeline modules
+│   ├── ingest.py
+│   ├── run_sql_analytics.py
+│   ├── train.py
+│   ├── explain.py
+│   ├── run_dbt.py
+│   └── run_pipeline.py
 │
 ├── screenshots/                     # Portfolio screenshots
-│   ├── api/                         # Swagger UI, prediction responses
-│   └── dashboard/                   # All 6 dashboard pages
+│   ├── api/
+│   └── dashboard/
 │
-├── test_api.py                      # API test suite (5 tests)
-├── check_project.py                 # Project health check
 ├── requirements.txt
+├── test_api.py
+├── check_project.py
 └── README.md
+```
 ---
 
 ## Tech Stack
